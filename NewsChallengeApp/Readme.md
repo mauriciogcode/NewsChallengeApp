@@ -2,3 +2,10 @@ Enable-WindowsOptionalFeature -Online -FeatureName $("Microsoft-Hyper-V", "Conta
 
 
 ssl iss server
+
+
+docker linux engine
+
+switch linux containers
+
+wsl activated
