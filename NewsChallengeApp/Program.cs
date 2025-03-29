@@ -23,6 +23,14 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+// Seed
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<NewsDbContext>();
+    context.Database.Migrate();
+    SeedData.Initialize(context);
+}
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -35,5 +43,18 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+//try
+//{
+//    using var scope = app.Services.CreateScope();
+//    var dbContext = scope.ServiceProvider.GetRequiredService<NewsDbContext>();
+//    // Intenta una consulta simple
+//    var canConnect = dbContext.Database.CanConnect();
+//    Log.Information($"Database connection test: {(canConnect ? "Successful" : "Failed")}");
+//}
+//catch (Exception ex)
+//{
+//    Log.Error(ex, "Error testing database connection");
+//}
 
 app.Run();

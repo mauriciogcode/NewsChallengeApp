@@ -9,3 +9,8 @@ docker linux engine
 switch linux containers
 
 wsl activated
+
+
+dotnet tool install --global dotnet-ef
+
+Host=host.docker.internal
