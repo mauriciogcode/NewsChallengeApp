@@ -8,13 +8,23 @@ using NewsApi.Application.Handlers;
 
 var builder = WebApplication.CreateBuilder(args);
 
+//CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAngularClient",
+        builder => builder.WithOrigins("http://localhost:4200") // Permite Angular
+                          .AllowAnyMethod()
+                          .AllowAnyHeader());
+});
 // Serilog
 Log.Logger = new LoggerConfiguration()
-    .WriteTo.Console()
-    .WriteTo.File("logs/log-.txt", rollingInterval: RollingInterval.Day)
+    .WriteTo.Console(new Serilog.Formatting.Json.JsonFormatter())  
+    .WriteTo.File("logs/log-.txt", rollingInterval: RollingInterval.Day)  
+    .Enrich.FromLogContext()
     .CreateLogger();
 
 builder.Host.UseSerilog();
+
 
 // PostgreSQL
 builder.Services.AddDbContext<NewsDbContext>(options =>
@@ -31,6 +41,13 @@ builder.Services.AddMediatR(cfg => {
 });
 
 var app = builder.Build();
+
+
+// Aplica CORS
+app.UseCors("AllowAngularClient");
+
+// Middleware de Excepciones Globales
+app.UseMiddleware<NewsApi.Presentation.Middlewares.ExceptionMiddleware>();
 
 // Seed
 using (var scope = app.Services.CreateScope())

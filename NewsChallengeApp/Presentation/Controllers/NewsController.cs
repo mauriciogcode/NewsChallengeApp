@@ -22,6 +22,9 @@ namespace NewsApi.Presentation.Controllers
         {
             var query = new GetNewsListQuery { PageNumber = pageNumber, PageSize = pageSize };
             var result = await _mediator.Send(query);
+
+            if (result == null) return NoContent();
+
             return Ok(result);
         }
 
@@ -57,6 +60,12 @@ namespace NewsApi.Presentation.Controllers
             var command = new DeleteNewsCommand { Id = id };
             await _mediator.Send(command);
             return NoContent();
+        }
+
+        [HttpGet("test-error")]
+        public IActionResult TestError()
+        {
+            throw new Exception("Test exception to verify logging and exception handling.");
         }
     }
 }
