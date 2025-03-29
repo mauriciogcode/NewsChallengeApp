@@ -25,9 +25,7 @@
 
   <ItemGroup>
     <Folder Include="Controllers\" />
-    <Folder Include="Application\" />
     <Folder Include="Shared\" />
-    <Folder Include="Presentation\" />
   </ItemGroup>
 
 </Project>
