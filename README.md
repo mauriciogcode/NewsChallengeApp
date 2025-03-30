@@ -1,4 +1,9 @@
-Proyecto Backend - Requisitos y Configuración Este proyecto backend requiere ciertos pasos y configuraciones previas para asegurar su correcta ejecución en el entorno local de desarrollo. A continuación, se detallan los pasos que debes seguir.
+Requisitos:
+levantar docker con db
+instalar paquetes nugget.
+
+Aclaraciones:
+Este proyecto backend requiere ciertos pasos y configuraciones previas para asegurar su correcta ejecución en el entorno local de desarrollo. A continuación, se detallan los pasos que debes seguir.
 
 Habilitar las Características Opcionales de Windows Para utilizar contenedores en Windows, necesitas habilitar las características correspondientes en tu sistema operativo. Ejecuta el siguiente comando en PowerShell como administrador:
 Enable-WindowsOptionalFeature -Online -FeatureName $("Microsoft-Hyper-V", "Containers") -All
