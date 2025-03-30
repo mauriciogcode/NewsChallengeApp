@@ -7,5 +7,6 @@ namespace NewsApi.Application.Queries
     {
         public int PageNumber { get; set; }
         public int PageSize { get; set; }
+        public bool OrderByDescending { get; set; } = true;
     }
 }

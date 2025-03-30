@@ -18,13 +18,16 @@ namespace NewsApi.Presentation.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<News>>> Get([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
+        public async Task<ActionResult<List<News>>> Get( [FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10, [FromQuery] bool orderByDescending = true) 
         {
-            var query = new GetNewsListQuery { PageNumber = pageNumber, PageSize = pageSize };
+            var query = new GetNewsListQuery
+            {
+                PageNumber = pageNumber,
+                PageSize = pageSize,
+                OrderByDescending = orderByDescending
+            };
             var result = await _mediator.Send(query);
-
             if (result == null) return NoContent();
-
             return Ok(result);
         }
 
