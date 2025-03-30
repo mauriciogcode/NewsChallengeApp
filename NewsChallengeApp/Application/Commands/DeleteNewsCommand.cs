@@ -2,7 +2,7 @@
 
 namespace NewsApi.Application.Commands
 {
-    public class DeleteNewsCommand : IRequest
+    public class DeleteNewsCommand : IRequest<Unit>
     {
         public int Id { get; set; }
     }

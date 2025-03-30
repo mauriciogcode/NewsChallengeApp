@@ -3,7 +3,7 @@ using NewsApi.Domain.Entities;
 
 namespace NewsApi.Application.Commands
 {
-    public class UpdateNewsCommand : IRequest
+    public class UpdateNewsCommand : IRequest<Unit>
     {
         public int Id { get; set; }
         public string Title { get; set; }

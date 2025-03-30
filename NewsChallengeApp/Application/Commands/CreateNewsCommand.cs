@@ -3,7 +3,7 @@ using NewsApi.Domain.Entities;
 
 namespace NewsApi.Application.Commands
 {
-    public class CreateNewsCommand : IRequest<int>  // Devuelve el Id de la noticia creada
+    public class CreateNewsCommand : IRequest<int>
     {
         public string Title { get; set; }
         public string Body { get; set; }

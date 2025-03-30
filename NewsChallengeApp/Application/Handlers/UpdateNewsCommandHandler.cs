@@ -3,10 +3,11 @@ using NewsApi.Domain.Entities;
 using NewsApi.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using NewsApi.Application.Commands;
+using System;
 
 namespace NewsApi.Application.Handlers
 {
-    public class UpdateNewsCommandHandler : IRequestHandler<UpdateNewsCommand>
+    public class UpdateNewsCommandHandler : IRequestHandler<UpdateNewsCommand, Unit>
     {
         private readonly NewsDbContext _context;
 
@@ -15,7 +16,7 @@ namespace NewsApi.Application.Handlers
             _context = context;
         }
 
-        public async Task Handle(UpdateNewsCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(UpdateNewsCommand request, CancellationToken cancellationToken)
         {
             var news = await _context.News
                                      .Where(n => n.Id == request.Id && !n.IsDeleted)
@@ -33,6 +34,8 @@ namespace NewsApi.Application.Handlers
             news.Date = request.Date;
 
             await _context.SaveChangesAsync(cancellationToken);
+
+            return Unit.Value;
         }
     }
 }
